@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const LoginForm: React.FC = () => {
+const Input: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   
@@ -152,4 +152,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+export default Input;

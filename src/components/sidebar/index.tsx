@@ -1,137 +1,167 @@
-import { Link, useLocation } from "react-router-dom";
-import { Box, Hidden, Typography } from "@mui/material";
-import homeIcon from "../../assets/icons/icon-nav-home.svg";
-import movieIcon from "../../assets/icons/icon-nav-movies.svg";
-import tvSeriesIcon from "../../assets/icons/icon-nav-tv-series.svg";
-import bookmarkIcon from "../../assets/icons/icon-nav-bookmark.svg";
+import React, { useState } from "react";
+import { Box, Button, IconButton, Drawer, Typography, MenuItem, Menu } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import StarIcon from '@mui/icons-material/Star';
+import { useNavigate,  } from "react-router-dom";
 
-const navLinks = [
-  {
-    name: "Home",
-    icon: homeIcon,
-    link: "/home",
-  },
-  {
-    name: "Login",
-    icon: homeIcon,
-    link: "/",
-  },
-  {
-    name: "Movies",
-    icon: movieIcon,
-    link: "/movies",
-  },
-  {
-    name: "TV Series",
-    icon: tvSeriesIcon,
-    link: "/tv-series",
-  },
-  {
-    name: "Bookmarks",
-    icon: bookmarkIcon,
-    link: "/bookmarks",
-  },
-];
+const Sidebar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false); // State to toggle the navbar
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const navigate = useNavigate();
 
-const Sidebar = () => {
-  const { pathname } = useLocation();
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  return (
-    <Box
-      sx={{
-        backgroundColor: "#161d2f",
-        padding: 2,
-        borderRadius: 2,
-        display: "flex",
-        flexDirection: {
-          xs: "row",
-          lg: "column",
-        },
-        alignItems: "center",
-        justifyContent: "space-between",
-        width: {
-          sm: "100%",
-          lg: 200,
-        },
-      }}
-    >
-      <Box
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const menuItems = [
+    { label: "Sensor", path: "/sensor" },
+    { label: "Relay", path: "/relay" },
+    { label: "Input", path: "/input" },
+    { label: "FTP Server", path: "/ftp-server" },
+    { label: "Database", path: "/database" },
+    { label: "Error", path: "/error" },
+    { label: "Management", path: "/management" },
+    { label: "Device", path: "/device" },
+    { label: "Auto Report", path: "/auto-report" },
+    { label: "System", path: "/system" },
+    { label: "Display", path: "/display" },
+    { label: "Connection", path: "/connection" },
+    { label: "Others", path: "/others" },
+  ];
+
+    return (
+      <>
+        {/* Menu Button */}
+        <IconButton
+        onClick={() => setIsOpen(true)}
         sx={{
-          display: "flex",
-          flexDirection: {
-            xs: "row",
-            lg: "column",
+          mt: 3,
+          py: 1.5,
+          borderRadius: "25px",
+          backgroundColor: "black",
+          color: "white",
+          "&:hover": {
+            backgroundColor: "#333333",
           },
-          gap: 5,
-          alignItems: {
-            xs: "center",
-            lg: "start",
-          },
-          width: "100%",
         }}
-      >
-        <Hidden smDown>
-          <Typography
-            variant="h5"
-            component="h1"
-            my={2}
-            fontWeight={400}
-            fontSize={18}
-          >
-            PikaShowApp
-          </Typography>
-        </Hidden>
+        >
+        <MenuIcon />
+        </IconButton>
 
+        {/* Navbar as a Drawer */}
+        <Drawer anchor="left" open={isOpen} onClose={() => setIsOpen(false)}>
         <Box
           sx={{
-            py: {
-              xs: "0px",
-              lg: "16px",
-            },
+            width: "300px",
+            height: "100vh",
+            backgroundColor: "#fff",
             display: "flex",
-            flexDirection: {
-              xs: "row",
-              lg: "column",
-            },
-            gap: 4,
+            flexDirection: "column",
+            position: "relative",
+            padding: "10px",
           }}
         >
-          {navLinks.map((item) => (
-            <Link
-              key={item.name}
-              to={item.link}
-              style={{ textDecoration: "none" }}
-            >
-              <Box
+          {/* Logo */}
+          <Box
+            sx={{
+              textAlign: "center",
+              padding: "10px 0",
+              marginBottom: "10px",
+              borderBottom: "1px solid #ccc",
+            }}
+          >
+            <img
+              src="https://via.placeholder.com/120x40"
+              alt="Logo"
+              style={{ maxWidth: "100%", height: "auto" }}
+            />
+          </Box>
+
+          {/* Menu Items */}
+          <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
+            {menuItems.map((item, index) => (
+              <Button
+                key={index}
+                variant="contained"
+                fullWidth
+                onClick={() => {
+                  navigate(item.path); // Navigate to the respective path
+                  setIsOpen(false); // Close the drawer
+                }}
                 sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 2,
-                  color: "white",
-                  textDecoration: "none",
+                  backgroundColor: "#000",
+                  color: "#fff",
+                  justifyContent: "align-center",
+                  borderRadius: "25px",
+                  marginBottom: "8px",
+                  "&:hover": { backgroundColor: "#333" },
                 }}
               >
-                <img
-                  src={item.icon}
-                  alt={item.name}
-                  style={{
-                    width: "18px",
-                    filter: `${
-                      pathname === item.link
-                        ? "invert(58%) sepia(14%) saturate(3166%) hue-rotate(215deg) brightness(91%) contrast(87%)"
-                        : "invert(84%)"
-                    }`,
-                  }}
-                />
-                <Hidden mdDown>
-                  <Typography>{item.name}</Typography>
-                </Hidden>
-              </Box>
-            </Link>
-          ))}
+                {item.label}
+              </Button>
+            ))}
+          </Box>
+
+          {/* Language and Close Button */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "10px 0",
+              borderTop: "1px solid #ccc",
+            }}
+          >
+    <>
+          <Button
+            variant="contained"
+            sx={{
+              mt: 3,
+              py: 1.5,
+              borderRadius: "30px",
+              backgroundColor: "black",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "#333333",
+              },
+            }}
+            startIcon={<StarIcon />} 
+            onClick={handleClick} 
+          >
+            Tiếng Việt
+          </Button>
+
+          {/* Menu for language options */}
+          <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+          >
+            <MenuItem  onClick={handleClose}>Tiếng Việt</MenuItem>
+            <MenuItem onClick={handleClose}>English</MenuItem>
+            <MenuItem onClick={handleClose}>티엔 한</MenuItem>
+          </Menu>
+        </>
+            <IconButton onClick={() => setIsOpen(false)}>
+              <CloseIcon />
+            </IconButton>
+          </Box>
         </Box>
-      </Box>
-    </Box>
+      </Drawer>
+    </>
   );
 };
 
