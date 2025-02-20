@@ -4,11 +4,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import StarIcon from '@mui/icons-material/Star';
 import { useNavigate,  } from "react-router-dom";
+import i18n from "../../i18n";
+import { useTranslation } from "react-i18next";
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false); // State to toggle the navbar
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const {t, i18n} = useTranslation();
   const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -18,6 +21,11 @@ const Sidebar: React.FC = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
+  
   const menuItems = [
     { label: "Sensor", path: "/sensor" },
     { label: "Relay", path: "/relay" },
@@ -133,7 +141,7 @@ const Sidebar: React.FC = () => {
             startIcon={<StarIcon />} 
             onClick={handleClick} 
           >
-            Tiếng Việt
+            {t('title')}
           </Button>
 
           {/* Menu for language options */}
@@ -150,8 +158,9 @@ const Sidebar: React.FC = () => {
               horizontal: "center",
             }}
           >
-            <MenuItem  onClick={handleClose}>Tiếng Việt</MenuItem>
-            <MenuItem onClick={handleClose}>English</MenuItem>
+            
+            <MenuItem  onClick={() => changeLanguage("vi")}>Tiếng Việt</MenuItem>
+            <MenuItem onClick={() => changeLanguage("en")}>English</MenuItem>
             <MenuItem onClick={handleClose}>티엔 한</MenuItem>
           </Menu>
         </>
@@ -160,6 +169,9 @@ const Sidebar: React.FC = () => {
             </IconButton>
           </Box>
         </Box>
+            <div style={{ textAlign: "center", padding: "20px" }}>
+    </div>
+  );  
       </Drawer>
     </>
   );

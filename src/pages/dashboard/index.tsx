@@ -14,6 +14,8 @@ import AppRoutes from '../../AppRoutes';
 import ConfigMenu from '../../components/configmenu';
 import { SensorChart } from '../../components/linechart';
 import SensorConfig from '../../components/sensorconfig';
+import SumConfig from '../../components/sumconfig';
+import CalibForm from '../../components/calibconfig';
 
 const Dashboard: React.FC = () => {
   const theme = useTheme();
@@ -51,7 +53,9 @@ const Dashboard: React.FC = () => {
       <div style={{ display: "flex", justifyContent:"flex-end", alignItems: "flex-start",  paddingRight: "50px", paddingBottom: "200px" }}>
       {/* <ConfigMenu></ConfigMenu>
       <SensorChart /> */}
-      <SensorConfig/>
+      {/* <SensorConfig/> */}
+      {/* <SumConfig></SumConfig> */}
+      {/* <CalibForm></CalibForm> */}
       </div>
       </div>
     </div>
