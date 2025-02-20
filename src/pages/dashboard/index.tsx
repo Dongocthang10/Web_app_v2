@@ -16,6 +16,9 @@ import { SensorChart } from '../../components/linechart';
 import SensorConfig from '../../components/sensorconfig';
 import SumConfig from '../../components/sumconfig';
 import CalibForm from '../../components/calibconfig';
+import ColorPicker from '../../components/alarmcolorpicker';
+import OutputConfig from '../../components/outputconfig';
+import FTPgeneral from '../../components/generalconfigFTP';
 
 const Dashboard: React.FC = () => {
   const theme = useTheme();
@@ -56,6 +59,9 @@ const Dashboard: React.FC = () => {
       {/* <SensorConfig/> */}
       {/* <SumConfig></SumConfig> */}
       {/* <CalibForm></CalibForm> */}
+      {/* <ColorPicker></ColorPicker> */}
+      {/* <OutputConfig></OutputConfig> */}
+      <FTPgeneral></FTPgeneral>
       </div>
       </div>
     </div>
