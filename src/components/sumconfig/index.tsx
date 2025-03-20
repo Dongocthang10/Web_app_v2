@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import {
-  Card,
-  CardContent,
   TextField,
-  Switch,
   FormControl,
-  InputLabel,
   Select,
   MenuItem,
   Typography,
 } from '@mui/material';
+import Switch from '../switch';
 
 interface SumConfigData {
   isActive: boolean;
@@ -26,6 +23,7 @@ interface SumConfigData {
   };
   limitTime: {
     isActive: boolean;
+    month: string;
     day: string;
     hour: string;
     minute: string;
@@ -34,6 +32,7 @@ interface SumConfigData {
 }
 
 const SumConfig = () => {
+  const [isEnabled, setIsEnabled] = useState(true);
   const [formData, setFormData] = useState<SumConfigData>({
     isActive: true,
     method: 'End Point',
@@ -49,6 +48,7 @@ const SumConfig = () => {
     },
     limitTime: {
       isActive: true,
+      month: '1',
       day: '1',
       hour: '1',
       minute: '1',
@@ -84,86 +84,108 @@ const SumConfig = () => {
   };
 
   return (
-    <div className="p-4 max-w-2xl mx-auto">
-      <Card className="shadow-lg">
-        <CardContent>
-          <div className="mb-6">
-            <Typography variant="h6" className="mb-4">
-              1. CO2
-              <span className="float-right">Sum</span>
-            </Typography>
+    <div className="max-w-5xl w-1/2 mx-auto p-7 bg-white rounded-lg shadow-2xl shadow-black/50">
+      <div className="flex justify-between items-center pt-0">
+        <h2 className="text-3xl font-medium">1. CO2</h2>
+        <span className="text-3xl font-medium">Sum</span>
+      </div>
+      <div className="border-t border-gray-300 border-dashed my-4"></div>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center">
+            <label className="text-sm font-medium mr-20">Kích hoạt</label>
+            <Switch checked={isEnabled} onChange={() => setIsEnabled(!isEnabled)} />
           </div>
+        </div>
 
-          {/* Kích Hoạt */}
-          <div className="flex items-center justify-between mb-4">
-            <Typography className="w-32">Kích Hoạt</Typography>
-            <div className="flex-1">
-              <Switch
-                checked={formData.isActive}
-                onChange={(e) => handleChange('isActive', e.target.checked)}
-              />
-            </div>
-          </div>
-
-          {/* Phương pháp tính */}
-          <div className="flex items-center mb-4">
-            <Typography className="w-32">Phương pháp tính</Typography>
-            <FormControl fullWidth>
-              <Select
-                value={formData.method}
-                size="small"
-                onChange={(e) => handleChange('method', e.target.value)}
-              >
-                <MenuItem value="End Point">End Point</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-
-          {/* Đơn vị */}
-          <div className="flex items-center mb-4">
-            <Typography className="w-32">Đơn vị</Typography>
-            <TextField
-              fullWidth
-              size="small"
-              value={formData.unit}
-              onChange={(e) => handleChange('unit', e.target.value)}
+        {/* Phương pháp tính */}
+        <div className="space-y-4 w-full">
+        {/* Server gần nhất */}
+        <div className="flex items-center">
+          <span className="text-sm w-32">Phương pháp tính</span>
+          <div className="flex-1 relative">
+            <input
+              type="text"
+              value="End point"
+              className="w-full p-2 border rounded-lg pr-10 text-sm"
             />
+            <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-lg">
+              {/* <Download className="w-4 h-4" /> */}
+            </button>
           </div>
+        </div>
 
-          {/* Type */}
-          <div className="flex items-center mb-4">
-            <Typography className="w-32">Type</Typography>
-            <FormControl fullWidth>
-              <Select
-                value={formData.type}
-                size="small"
-                onChange={(e) => handleChange('type', e.target.value)}
-              >
-                <MenuItem value="Day Sum Value">Day Sum Value</MenuItem>
-              </Select>
-            </FormControl>
+        <div className="flex items-center">
+          <span className="text-sm w-32">Đơn vị</span>
+          <input
+            type="text"
+            value="m3/ngày"
+            className="w-full p-2 border rounded-lg text-sm"
+          />
+        </div>
+        <div className="flex items-center">
+          <span className="text-sm w-32">Type</span>
+          <input
+            type="text"
+            value="Day Sum Value"
+            className="w-full p-2 text-sm border rounded-lg"
+          />
+        </div>
+        <div className="flex items-center">
+          <span className="text-sm w-32">Sum Index</span>
+          <input
+            type="number"
+            value="60"
+            className="w-full p-2 border rounded-lg text-sm"
+          />
+        </div>
+      </div>
+
+
+        {/* Reset Date Time */}
+        <div className="flex items-center mb-4 space-y-4">
+          <span className="text-sm font-semibold w-32">Reset Date Time</span>
+          <div className="flex-1 space-x-32 space-y-2">
+            {Object.entries(formData.resetDateTime).map(([key, value]) => (
+              <div key={key} className="flex items-center gap-2">
+                <Typography className="w-16 text-xs">{key.charAt(0).toUpperCase() + key.slice(1)}</Typography>
+                <TextField
+                  fullWidth
+                  size="small"
+                  value={value}
+                  variant="outlined"
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      backgroundColor: 'white',
+                      borderRadius: '4px',
+                      fontSize: '0.75rem',
+                      height: '30px'
+                    },
+                    '& .MuiOutlinedInput-notchedOutline': {
+                      borderColor: '#E0E0E0',
+                    },
+                  }}
+                  onChange={(e) => handleResetDateTimeChange(key, e.target.value)}
+                />
+              </div>
+            ))}
           </div>
+        </div>
 
-          {/* Sum Index */}
-          <div className="flex items-center mb-4">
-            <Typography className="w-32">Sum Index</Typography>
-            <TextField
-              fullWidth
-              size="small"
-              value={formData.sumIndex}
-              onChange={(e) => handleChange('sumIndex', e.target.value)}
-            />
-          </div>
-
-          {/* Reset Date Time */}
-          <div className="flex items-start mb-4">
-            <Typography className="w-32 mt-2">Reset Date Time</Typography>
-            <div className="flex-1 space-y-3">
-              {Object.entries(formData.resetDateTime).map(([key, value]) => (
-                <div key={key} className="flex items-center gap-4">
+        {/* Tính năng giới hạn */}
+        <div className="flex items-center">
+          <label className="text-sm font-medium mr-20">Kích hoạt</label>
+          <Switch checked={isEnabled} onChange={() => setIsEnabled(!isEnabled)} />
+        </div>
+        <div className="flex items-center mb-4">
+        <span className="text-sm font-semibold w-32">Tính năng giới hạn</span>
+          <div className="flex-1 space-x-32 space-y-2">
+            {Object.entries(formData.limitTime)
+              .filter(([key]) => key !== 'isActive')
+              .map(([key, value]) => (
+                <div key={key} className="flex items-center gap-2">
                   <Typography className="w-16 text-sm">{key.charAt(0).toUpperCase() + key.slice(1)}</Typography>
                   <TextField
-                    fullWidth
+                    className="w-24"
                     size="small"
                     value={value}
                     variant="outlined"
@@ -171,56 +193,19 @@ const SumConfig = () => {
                       '& .MuiOutlinedInput-root': {
                         backgroundColor: 'white',
                         borderRadius: '4px',
+                        fontSize: '0.75rem',
+                        height: '30px'
                       },
                       '& .MuiOutlinedInput-notchedOutline': {
                         borderColor: '#E0E0E0',
                       },
                     }}
-                    onChange={(e) => handleResetDateTimeChange(key, e.target.value)}
+                    onChange={(e) => handleLimitTimeChange(key, e.target.value)}
                   />
                 </div>
               ))}
-            </div>
           </div>
-
-          {/* Tính năng giới hạn */}
-          <div className="flex items-start mb-4">
-            <Typography className="w-32">Tính năng giới hạn</Typography>
-            <div className="flex-1 space-y-3">
-              <div className="flex items-center justify-between">
-                <Typography>Kích hoạt</Typography>
-                <Switch
-                  checked={formData.limitTime.isActive}
-                  onChange={(e) => handleLimitTimeChange('isActive', e.target.checked)}
-                />
-              </div>
-              {Object.entries(formData.limitTime)
-                .filter(([key]) => key !== 'isActive')
-                .map(([key, value]) => (
-                  <div key={key} className="flex items-center gap-4">
-                    <Typography className="w-16 text-sm">{key.charAt(0).toUpperCase() + key.slice(1)}</Typography>
-                    <TextField
-                      fullWidth
-                      size="small"
-                      value={value}
-                      variant="outlined"
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          backgroundColor: 'white',
-                          borderRadius: '4px',
-                        },
-                        '& .MuiOutlinedInput-notchedOutline': {
-                          borderColor: '#E0E0E0',
-                        },
-                      }}
-                      onChange={(e) => handleLimitTimeChange(key, e.target.value)}
-                    />
-                  </div>
-                ))}
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+        </div>
     </div>
   );
 };

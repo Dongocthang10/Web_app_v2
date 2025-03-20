@@ -12,13 +12,18 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import Sidebar from '../../components/sidebar';
 import AppRoutes from '../../AppRoutes';
 import ConfigMenu from '../../components/configmenu';
-import { SensorChart } from '../../components/linechart';
+import SensorChart from '../../components/linechart';
 import SensorConfig from '../../components/sensorconfig';
 import SumConfig from '../../components/sumconfig';
 import CalibForm from '../../components/calibconfig';
 import ColorPicker from '../../components/alarmcolorpicker';
 import OutputConfig from '../../components/outputconfig';
 import FTPgeneral from '../../components/generalconfigFTP';
+import EvoSensor from '../../components/evosensor';
+import SensorGeneral from '../../components/sensorgeneral';
+import SensorAdvance from '../../components/sensoradvance';
+import Switch from '../../components/switch';
+import AquasoftPanel from '../../components/aquasoft';
 
 const Dashboard: React.FC = () => {
   const theme = useTheme();
@@ -54,14 +59,18 @@ const Dashboard: React.FC = () => {
       </div>
       <div className="container">
       <div style={{ display: "flex", justifyContent:"flex-end", alignItems: "flex-start",  paddingRight: "50px", paddingBottom: "200px" }}>
-      {/* <ConfigMenu></ConfigMenu>
-      <SensorChart /> */}
+      {/* <ConfigMenu></ConfigMenu> */}
+      {/* <SensorChart /> */}
       {/* <SensorConfig/> */}
-      {/* <SumConfig></SumConfig> */}
+      {/* <SumConfig></SumConfig>  */}
       {/* <CalibForm></CalibForm> */}
       {/* <ColorPicker></ColorPicker> */}
       {/* <OutputConfig></OutputConfig> */}
       <FTPgeneral></FTPgeneral>
+      <EvoSensor></EvoSensor>
+      {/* <SensorGeneral></SensorGeneral>
+      <SensorAdvance/> */}
+      {/* <AquasoftPanel></AquasoftPanel> */}
       </div>
       </div>
     </div>

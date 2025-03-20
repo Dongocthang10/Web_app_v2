@@ -48,9 +48,9 @@ export default function SensorChart() {
   };
 
   return (
-    <div className="p-4 w-[900px] rounded-lg">
+    <div className="p-4 w-[900px] bg-white rounded-lg">
       <div className="flex justify-between items-center mb-4">
-      <h2 className="text-lg font-semibold shadow-xs shadow-black">Thông tin cảm biến</h2>
+        <h2 className="text-lg font-bold shadow-md">Thông tin cảm biến</h2>
         <button className="bg-black text-white px-4 py-1 rounded text-sm">Biểu đồ</button>
       </div>
       <div className="h-[400px] w-full">
@@ -59,43 +59,35 @@ export default function SensorChart() {
 
       <div className="flex items-center justify-between mt-4 text-sm text-gray-700">
         <div className="flex items-center gap-2">
-          <button className="px-2 py-1 rounded">Previous</button>
+          <button className="px-2 py-1 bg-gray-200 rounded">Previous</button>
           <span className="px-2 py-1 bg-black text-white rounded">1</span>
           <span>2 ... 68</span>
-          <button className="px-2 py-1 rounded">Next</button>
+          <button className="px-2 py-1 bg-gray-200 rounded">Next</button>
         </div>
-        <span>From</span>
+
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
             <Calendar className="text-gray-600 w-4 h-4" />
             <DatePicker
               selected={fromDate}
               onChange={(date) => setFromDate(date)}
-              showTimeSelect
-              timeFormat="HH:mm:ss"
-              timeIntervals={1}
-              dateFormat="HH:mm:ss dd/MM/yyyy"
-              className="w-[120px] bg-blue-100 text-xs p-1 rounded border border-gray-300 focus:outline-none"
+              className="w-[140px] bg-gray-100 text-xs p-1 rounded border border-gray-300 focus:outline-none"
             />
           </div>
-          <span>To</span>
+
           <div className="flex items-center gap-2">
             <Calendar className="text-gray-600 w-4 h-4" />
             <DatePicker
               selected={toDate}
               onChange={(date) => setToDate(date)}
-              showTimeSelect
-              timeFormat="HH:mm:ss"
-              timeIntervals={1}
-              dateFormat="HH:mm:ss dd/MM/yyyy"
-              className="w-[120px] bg-blue-100 text-xs p-1 rounded border border-gray-300 focus:outline-none"
+              className="w-[140px] bg-gray-100 text-xs p-1 rounded border border-gray-300 focus:outline-none"
             />
           </div>
-          <span>With</span>
+
           <select
             value={timeInterval}
             onChange={(e) => setTimeInterval(e.target.value)}
-            className="w-[50px] bg-blue-100 text-xs p-1 rounded border border-gray-300 focus:outline-none"
+            className="w-[60px] bg-gray-100 text-xs p-1 rounded border border-gray-300 focus:outline-none"
           >
             <option value="1m">1m</option>
             <option value="2m">2m</option>
