@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Trash2, Plus, Copy, Save } from 'lucide-react';
 import Switch from '../switch';
+import { useTranslation } from 'react-i18next';
 interface SensorRow {
   id: number;
   inputIndex: string;
@@ -9,6 +10,7 @@ interface SensorRow {
 }
 
 const AquasoftConfig = () => {
+  const { t } = useTranslation()
   const [isEnabled, setIsEnabled] = useState(true);
   const [serverConfig, setServerConfig] = useState({
     serverUrl: 'dl.aquasoft.vn',
@@ -64,7 +66,7 @@ const AquasoftConfig = () => {
             <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-2">
                 <div className="flex items-center">
-                    <label className="text-sm font-medium mr-24">Kích hoạt</label>
+                    <label className="text-sm font-medium mr-24">{t('welcome')}</label>
                     <Switch checked={isEnabled} onChange={() => setIsEnabled(!isEnabled)} />
             </div>
         </div>

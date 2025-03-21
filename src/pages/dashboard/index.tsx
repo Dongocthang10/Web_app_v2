@@ -27,7 +27,7 @@ import AquasoftPanel from '../../components/aquasoft';
 import SamplingComponent from '../../components/sampling';
 import StateControlComponent from '../../components/statecontrol';
 import Simulation from '../../components/simulation';
-import TT17Config from '../../components/tt17';
+// import MonitoringStation from '../../components/tt17';
 const Dashboard: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -73,11 +73,11 @@ const Dashboard: React.FC = () => {
       {/* <EvoSensor></EvoSensor> */}
       {/* <SensorGeneral></SensorGeneral>
       <SensorAdvance/> */}
-      {/* <AquasoftPanel></AquasoftPanel> */}
+      <AquasoftPanel></AquasoftPanel>
       {/* <SamplingComponent></SamplingComponent> */}
       {/* <StateControlComponent></StateControlComponent> */}
       {/* <Simulation></Simulation> */}
-      <TT17Config></TT17Config>
+      {/* <MonitoringStation></MonitoringStation> */}
       </div>
       </div>
     </div>

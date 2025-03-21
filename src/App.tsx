@@ -13,7 +13,7 @@ import Relay from "./pages/relay";
 import Sensor from "./pages/sensor";
 import System from "./pages/system";
 import LoginForm from "./pages/login";
-import "./i18n";
+import i18n from "./i18n";
 function App() {
   return (
     <Router>
