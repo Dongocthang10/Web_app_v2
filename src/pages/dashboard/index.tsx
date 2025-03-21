@@ -24,7 +24,10 @@ import SensorGeneral from '../../components/sensorgeneral';
 import SensorAdvance from '../../components/sensoradvance';
 import Switch from '../../components/switch';
 import AquasoftPanel from '../../components/aquasoft';
-
+import SamplingComponent from '../../components/sampling';
+import StateControlComponent from '../../components/statecontrol';
+import Simulation from '../../components/simulation';
+import TT17Config from '../../components/tt17';
 const Dashboard: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -66,11 +69,15 @@ const Dashboard: React.FC = () => {
       {/* <CalibForm></CalibForm> */}
       {/* <ColorPicker></ColorPicker> */}
       {/* <OutputConfig></OutputConfig> */}
-      <FTPgeneral></FTPgeneral>
-      <EvoSensor></EvoSensor>
+      {/* <FTPgeneral></FTPgeneral> */}
+      {/* <EvoSensor></EvoSensor> */}
       {/* <SensorGeneral></SensorGeneral>
       <SensorAdvance/> */}
       {/* <AquasoftPanel></AquasoftPanel> */}
+      {/* <SamplingComponent></SamplingComponent> */}
+      {/* <StateControlComponent></StateControlComponent> */}
+      {/* <Simulation></Simulation> */}
+      <TT17Config></TT17Config>
       </div>
       </div>
     </div>
