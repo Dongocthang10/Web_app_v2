@@ -4,23 +4,23 @@ import { initReactI18next } from "react-i18next";
 const resources = {
     en: {
         translation: {
-            "welcome": "Welcome"
+            'welcome': 'Welcome'
         }
     },
     vi: {
         translation: {
-            "welcome": "Chào mừng"
+            'welcome': 'Chào mừng'
         }
     }
 }
 
 i18n.use(initReactI18next).init({
     resources,
-    lng: "vi",
-    fallbackLng: "vi",
+    lng: 'vi',
+    fallbackLng: 'vi',
     interpolation: {
         escapeValue: false
     }
 })
 
-export default i18n;
+// export default i18n;

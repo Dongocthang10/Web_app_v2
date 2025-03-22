@@ -55,7 +55,7 @@ const AquasoftConfig = () => {
     <div className="max-w-5xl w-full mx-auto p-7 bg-white rounded-lg shadow-2xl shadow-black/50">
 
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">Aquasoft</h1>
+          <h1 className="text-2xl font-bold text-gray-800">{t('welcome')}</h1>
           <button className="flex items-center gap-2 bg-black text-white px-3 py-2 rounded-lg">
             <Save size={20} />
             Save
